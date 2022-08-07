@@ -1,0 +1,31 @@
+
+projet:
+titre
+description
+type (backend frontend ios android)
+contributeurs (many to many avec through materialisé)
+author_user_id
+
+Contributors many-to-many through:
+user_id foreignkey
+project_id foreignkey
+permission (choicefield)
+role (charfield)
+
+probleme: (issue)
+
+titre
+description
+balise/tag (bug, amélioration, tâche)
+priorité (faible, moyenne, élevée)
+project_id FOREIGN KEY
+auteur (foreignkey)
+assigné (auteur par défaut, foreignkey)
+created_time (datetime add now)
+
+
+commentaire:
+description
+author_user_id (foreignkey
+issue_id (foreignkey)
+created_time (datetime add now)
