@@ -1,8 +1,14 @@
 # P10
- install django
-
- install djangorestframework
-
+ Install the following:
+```
+pip install django
+```
+```
+pip install djangorestframework
+```
+```
+pip install drf-nested-routers
+```
 
 TODO:
 

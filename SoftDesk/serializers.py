@@ -11,6 +11,13 @@ class ProjectSerializer(serializers.HyperlinkedModelSerializer):
                   'description', 'project_type']
 
 
+class ContributorSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Contributor
+        depth = 0
+        fields = ['id', 'project', 'user', 'permission', 'role']
+
+
 class IssueSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Issue
@@ -23,7 +30,7 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Comment
         depth = 0
-        fields = ['id', 'issue', 'author', 'description', 'project_type']
+        fields = ['id', 'issue', 'author', 'description', 'created_time']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
