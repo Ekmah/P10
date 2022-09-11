@@ -1,5 +1,5 @@
 # P10
- Install the following:
+ Install or execute the following:
 ```
 pip install django
 ```
@@ -12,10 +12,28 @@ pip install drf-nested-routers
 
 TODO:
 
+permissions
+(made register, changed login/logout path too)
+
+
+tej les prints # DONE
+choice fields pour les models # DONE
+
+get_or_404 # is it needed? comportment seems to 
+already include 404 errors catch
+
+catch comme si debug = False
+
+doc postman
+OWASP
+
+
+
+
 github copilot
 https://www.youtube.com/watch?v=SQf9ZQsqW30
 
-repasser diapo P7, faire diapo P9
+
 
 potdefleur123
 
