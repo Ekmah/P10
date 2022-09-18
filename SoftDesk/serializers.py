@@ -31,12 +31,12 @@ class IssueSerializer(serializers.HyperlinkedModelSerializer):
 
 class CommentSerializer(serializers.HyperlinkedModelSerializer):
     issue = serializers.ReadOnlyField(source='issue.issue_id')
-    # author = serializers.ReadOnlyField(source='author_user.user_id')
 
     class Meta:
         model = Comment
         depth = 0
         fields = ['id', 'issue', 'author', 'description', 'created_time']
+        read_only_fields = ['author']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):

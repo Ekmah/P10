@@ -54,7 +54,12 @@ class IsContributorOrProjectOwner(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         value = False
         project = Project.objects.get(id=view.kwargs['project_pk'])
-        if request.user in project.contributors.all() or\
-                request.user == obj.project.author:
-            value = True
+        try:
+            if request.user in project.contributors.all() or \
+                    request.user == obj.project.author:
+                value = True
+        except AttributeError:
+            if request.user in project.contributors.all() or \
+                    request.user == obj.issue.project.author:
+                value = True
         return value

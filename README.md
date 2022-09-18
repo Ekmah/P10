@@ -16,14 +16,15 @@ permissions
 (made register, changed login/logout path too)
 
 choix de selects pour models défini par abbréviation puis nom complet
-eg: ('H', 'HIGH'),
+eg: ('H', 'HIGH'), # DONE
 
 tej les prints # DONE
 
 choice fields pour les models # DONE
 
-doc postman
+doc postman # DONE ?
 
+utiliser postman pour test ce que je doit catch
 catch comme si debug = False
 
 OWASP
