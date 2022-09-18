@@ -4,10 +4,10 @@ from django.contrib.auth.models import User
 
 class Project(models.Model):
     p_type = (
-        ('back-end', 'back-end'),
-        ('front-end', 'front-end'),
+        ('BE', 'back-end'),
+        ('FE', 'front-end'),
         ('iOS', 'iOS'),
-        ('android', 'android'),
+        ('AD', 'android'),
 
     )
 
@@ -20,35 +20,31 @@ class Project(models.Model):
 
 
 class Contributor(models.Model):
-    permissions = (
-        ('', ''),
-        ('', ''),
-    )
-    role_type = (
-        ('', ''),
-        ('', ''),
-    )
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    permission = models.CharField(max_length=20, choices=permissions)
-    role = models.CharField(max_length=64)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['project', 'user'],
+                                    name='unique contributor')
+                       ]
 
 
 class Issue(models.Model):
     priority_type = (
-        ('WEAK', ''),
-        ('MEDIUM', ''),
-        ('HIGH', ''),
+        ('W', 'WEAK'),
+        ('M', 'MEDIUM'),
+        ('H', 'HIGH'),
     )
     tags = (
-        ('BUG', ''),
-        ('UPGRADE', ''),
-        ('TASK', ''),
+        ('B', 'BUG'),
+        ('U', 'UPGRADE'),
+        ('T', 'TASK'),
     )
     state = (
-        ('TO_DO', ''),
-        ('IN_PROGRESS', ''),
-        ('COMPLETED', ''),
+        ('TD', 'TO_DO'),
+        ('IP', 'IN_PROGRESS'),
+        ('C', 'COMPLETED'),
     )
 
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
@@ -57,9 +53,15 @@ class Issue(models.Model):
                                       related_name="assigned_user")
     title = models.CharField(max_length=128)
     description = models.TextField(max_length=2048, blank=True)
-    tag = models.CharField(max_length=16)
-    priority = models.CharField(max_length=16)
-    status = models.CharField(max_length=16)
+    tag = models.CharField(max_length=16,
+                           choices=tags,
+                           default=tags[0][0])
+    priority = models.CharField(max_length=16,
+                                choices=priority_type,
+                                default=priority_type[0][0])
+    status = models.CharField(max_length=16,
+                              choices=state,
+                              default=state[0][0])
     created_time = models.DateTimeField(auto_now_add=True)
 
 

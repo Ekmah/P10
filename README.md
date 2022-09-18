@@ -15,16 +15,17 @@ TODO:
 permissions
 (made register, changed login/logout path too)
 
+choix de selects pour models défini par abbréviation puis nom complet
+eg: ('H', 'HIGH'),
 
 tej les prints # DONE
+
 choice fields pour les models # DONE
 
-get_or_404 # is it needed? comportment seems to 
-already include 404 errors catch
+doc postman
 
 catch comme si debug = False
 
-doc postman
 OWASP
 
 
