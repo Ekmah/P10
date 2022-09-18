@@ -12,6 +12,7 @@ class ProjectSerializer(serializers.HyperlinkedModelSerializer):
         depth = 0
         fields = ['id', 'url', 'author', 'contributors', 'title',
                   'description', 'project_type']
+        read_only_fields = ['author']
 
 
 class ContributorSerializer(serializers.HyperlinkedModelSerializer):
@@ -19,6 +20,7 @@ class ContributorSerializer(serializers.HyperlinkedModelSerializer):
         model = Contributor
         depth = 0
         fields = ['id', 'project', 'user']
+        read_only_fields = ['project']
 
 
 class IssueSerializer(serializers.HyperlinkedModelSerializer):
@@ -27,6 +29,7 @@ class IssueSerializer(serializers.HyperlinkedModelSerializer):
         depth = 0
         fields = ['id', 'project', 'author', 'assigned_user', 'title',
                   'description', 'tag', 'priority', 'status', 'created_time']
+        read_only_fields = ['project', 'author']
 
 
 class CommentSerializer(serializers.HyperlinkedModelSerializer):
