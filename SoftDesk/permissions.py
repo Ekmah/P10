@@ -1,6 +1,5 @@
 from rest_framework import permissions
-from rest_framework import exceptions
-from SoftDesk.models import Contributor, Comment, Issue, Project
+from SoftDesk.models import Project
 
 # determine type of authorisations
 # determine place where authorisation checks are wanted

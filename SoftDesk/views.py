@@ -1,9 +1,7 @@
 from django.db.models import Q
-from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
-from rest_framework.response import Response
 from SoftDesk.models import Project, Contributor, Comment, Issue
 from SoftDesk.serializers import UserSerializer, GroupSerializer, \
     ProjectSerializer, IssueSerializer, ContributorSerializer, \

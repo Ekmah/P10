@@ -9,6 +9,9 @@ pip install djangorestframework
 ```
 pip install drf-nested-routers
 ```
+```
+pip install djangorestframework_simplejwt
+```
 
 TODO:
 
@@ -22,12 +25,12 @@ tej les prints # DONE
 
 choice fields pour les models # DONE
 
-doc postman # DONE ?
+doc postman # must comment each routes
 
 utiliser postman pour test ce que je doit catch
 catch comme si debug = False
 
-OWASP
+OWASP # JWT token + urls pour (need modify things now)
 
 
 

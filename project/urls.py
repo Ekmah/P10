@@ -1,9 +1,8 @@
-from django.contrib import admin
 from django.urls import include, path
-# from rest_framework import routers
 from rest_framework_nested import routers
+from rest_framework_simplejwt import views as jwt_views
 from SoftDesk import views
-from rest_framework import urls
+
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
@@ -35,5 +34,9 @@ urlpatterns = [
     path('', include(issue_router.urls)),
     path('', include(comment_router.urls)),
     path('signup/', views.RegisterView.as_view(), name='auth_register'),
-    path('', include('rest_framework.urls', namespace='rest_framework'))
+    path('', include('rest_framework.urls', namespace='rest_framework')),
+    path('token/', jwt_views.TokenObtainPairView.as_view(),
+         name='token_obtain_pair'),
+    path('token/refresh/', jwt_views.TokenRefreshView.as_view(),
+         name='token_refresh'),
 ]
