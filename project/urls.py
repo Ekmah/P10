@@ -34,9 +34,9 @@ urlpatterns = [
     path('', include(issue_router.urls)),
     path('', include(comment_router.urls)),
     path('signup/', views.RegisterView.as_view(), name='auth_register'),
-    path('', include('rest_framework.urls', namespace='rest_framework')),
-    path('token/', jwt_views.TokenObtainPairView.as_view(),
+    path('drf', include('rest_framework.urls', namespace='rest_framework')),
+    path('login/', jwt_views.TokenObtainPairView.as_view(),
          name='token_obtain_pair'),
-    path('token/refresh/', jwt_views.TokenRefreshView.as_view(),
+    path('login/refresh/', jwt_views.TokenRefreshView.as_view(),
          name='token_refresh'),
 ]
