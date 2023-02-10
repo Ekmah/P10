@@ -6,30 +6,33 @@ from rest_framework import serializers
 from SoftDesk.models import Project, Issue, Contributor, Comment
 
 
-class ProjectSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Project
-        depth = 0
-        fields = ['id', 'url', 'author', 'contributors', 'title',
-                  'description', 'project_type']
-        read_only_fields = ['author']
-
-
 class ContributorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Contributor
         depth = 0
-        fields = ['id', 'project', 'user']
-        read_only_fields = ['project', 'user']
+        fields = ['id', 'project_id', 'user_id']
+        read_only_fields = ['project_id', 'user_id']
+
+
+class ProjectSerializer(serializers.HyperlinkedModelSerializer):
+    contributors = serializers.PrimaryKeyRelatedField(many=True,
+                                                      read_only=True)
+
+    class Meta:
+        model = Project
+        depth = 0
+        fields = ['id', 'author_id', 'contributors', 'title',
+                  'description', 'project_type']
+        read_only_fields = ['author']
 
 
 class IssueSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Issue
         depth = 0
-        fields = ['id', 'project', 'author', 'assigned_user', 'title',
+        fields = ['id', 'project_id', 'author_id', 'assigned_user_id', 'title',
                   'description', 'tag', 'priority', 'status', 'created_time']
-        read_only_fields = ['project', 'author', 'assigned_user']
+        read_only_fields = ['project_id', 'author_id', 'assigned_user']
 
 
 class CommentSerializer(serializers.HyperlinkedModelSerializer):
@@ -38,20 +41,20 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Comment
         depth = 0
-        fields = ['id', 'issue', 'author', 'description', 'created_time']
-        read_only_fields = ['author', 'issue']
+        fields = ['id', 'issue_id', 'author_id', 'description', 'created_time']
+        read_only_fields = ['author_id', 'issue_id']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'groups']
+        fields = ['id', 'username', 'email', 'groups']
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group
-        fields = ['url', 'name']
+        fields = ['id', 'name']
 
 
 class RegisterSerializer(serializers.ModelSerializer):
