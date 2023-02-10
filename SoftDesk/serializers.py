@@ -20,7 +20,7 @@ class ContributorSerializer(serializers.HyperlinkedModelSerializer):
         model = Contributor
         depth = 0
         fields = ['id', 'project', 'user']
-        read_only_fields = ['project']
+        read_only_fields = ['project', 'user']
 
 
 class IssueSerializer(serializers.HyperlinkedModelSerializer):
@@ -29,7 +29,7 @@ class IssueSerializer(serializers.HyperlinkedModelSerializer):
         depth = 0
         fields = ['id', 'project', 'author', 'assigned_user', 'title',
                   'description', 'tag', 'priority', 'status', 'created_time']
-        read_only_fields = ['project', 'author']
+        read_only_fields = ['project', 'author', 'assigned_user']
 
 
 class CommentSerializer(serializers.HyperlinkedModelSerializer):
@@ -39,13 +39,13 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
         model = Comment
         depth = 0
         fields = ['id', 'issue', 'author', 'description', 'created_time']
-        read_only_fields = ['author']
+        read_only_fields = ['author', 'issue']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'groups', 'password']
+        fields = ['url', 'username', 'email', 'groups']
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):

@@ -47,7 +47,8 @@ class ContributorViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         project = Project.objects.get(id=self.kwargs['project_pk'])
-        serializer.save(project=project)
+        user = User.objects.get(id=self.request.data['user_id'])
+        serializer.save(project=project, user=user)
 
     def get_queryset(self):
         pk = self.kwargs['project_pk']
@@ -71,7 +72,12 @@ class IssueViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         project = Project.objects.get(id=self.kwargs['project_pk'])
-        serializer.save(author=self.request.user, project=project)
+        if 'assigned_user_id' in self.request.data:
+            user = User.objects.get(id=self.request.data['assigned_user_id'])
+        else:
+            user = self.request.user
+        serializer.save(author=self.request.user, project=project,
+                        assigned_user=user)
 
     def get_queryset(self):
         pk = self.kwargs['project_pk']
@@ -118,6 +124,13 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def get_permissions(self):
+        if self.request.method in ['PUT', 'DELETE', 'PATCH']:
+            return [permissions.IsAuthenticated(), permissions.IsAdminUser()]
+        if self.request.method in ['GET', 'LIST']:
+            return [permissions.IsAuthenticated()]
+        return [permissions.IsAdminUser()]
+
 
 class GroupViewSet(viewsets.ModelViewSet):
     """
@@ -125,4 +138,4 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAdminUser]
