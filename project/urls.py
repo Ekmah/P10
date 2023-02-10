@@ -1,4 +1,5 @@
 from django.urls import include, path
+from django.contrib import admin
 from rest_framework_nested import routers
 from rest_framework_simplejwt import views as jwt_views
 from SoftDesk import views
@@ -28,6 +29,7 @@ comment_router.register(r'comments', views.CommentViewSet, basename='comment')
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('', include(project_router.urls)),
     path('', include(contributor_router.urls)),
