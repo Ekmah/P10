@@ -36,7 +36,6 @@ class IssueSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class CommentSerializer(serializers.HyperlinkedModelSerializer):
-    issue = serializers.ReadOnlyField(source='issue.issue_id')
 
     class Meta:
         model = Comment
